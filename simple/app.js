@@ -3,6 +3,7 @@ const app = express();
 const port = process.env.PORT || 3012;
 
 app.get("/", (req, res) => res.type('html').send(html));
+app.get("/health", (req, res) => res.sendStatus(200));
 
 const server = app.listen(port, process.env.HOST || '127.0.0.1', () => console.log(`Example app listening on port ${port}!`));
 
