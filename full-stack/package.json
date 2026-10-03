@@ -1,0 +1,19 @@
+{
+  "name": "deploying-fullstack-with-render-sample",
+  "version": "1.0.0",
+  "description": "back-end for the front-end to be used as an example for how to deploy a fullstack app using Render.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env app.js",
+    "build": "npm --prefix client run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.16.3"
+  },
+  "engines": {
+    "node": ">=24.21.0 <25"
+  }
+}

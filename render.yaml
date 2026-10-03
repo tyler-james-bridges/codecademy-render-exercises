@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: course-render-hello
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: simple
+    buildCommand: npm ci
+    startCommand: npm start
+    autoDeployTrigger: "off"
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 24.21.0
+      - key: HOST
+        value: 0.0.0.0
+  - type: web
+    name: course-render-activities
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: full-stack
+    buildCommand: npm ci && npm --prefix client ci && npm run build
+    startCommand: npm start
+    autoDeployTrigger: "off"
+    healthCheckPath: /api/activities
+    envVars:
+      - key: NODE_VERSION
+        value: 24.21.0
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: course-render-activities-db
+          property: connectionString
+
+databases:
+  - name: course-render-activities-db
+    plan: free
+    region: oregon
+    postgresMajorVersion: "17"
+    databaseName: render_course
+    ipAllowList: []
